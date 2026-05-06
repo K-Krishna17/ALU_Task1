@@ -1,8 +1,10 @@
-Task Overview
+Task Overview:
+
 This repository contains the design and implementation of a basic Arithmetic Logic Unit (ALU) in Verilog, developed as part of the CODTECH internship program.
 The ALU is a fundamental digital circuit used in processors to perform arithmetic and logical operations.
 
 The goal of this task is to:
+
 -> Implement an ALU supporting addition, subtraction, multiplication, division, AND, OR, XOR, NOT, shift left, and shift right.
 -> Verify functionality using a testbench.
 -> Document results with a simulation report.
@@ -25,6 +27,7 @@ The ALU supports the following operations, selected via a 4-bit opcode:
 
 
 Conclusion
+
 -> The ALU module (alu.v) defines inputs A, B, and opcode, and produces an output result.
 -> A case statement selects the operation based on the opcode.
 -> Arithmetic operations (add, subtract, multiply, divide) use Verilog’s built-in operators.
@@ -36,6 +39,7 @@ Conclusion
 
 
 Observe Results
+
 -> The $monitor statement in the testbench prints results for each operation.
 -> Waveforms can be viewed in the simulator GUI.
 -> Capture screenshots for the simulation report.
