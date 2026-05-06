@@ -1,6 +1,6 @@
 Task Overview:
 
-This repository contains the design and implementation of a basic Arithmetic Logic Unit (ALU) in Verilog, developed as part of the CODTECH internship program.
+This repository contains the design and implementation of a basic Arithmetic Logic Unit (ALU) in Verilog, developed as part of TASK_1 from CODTECH IT SOLUTIONS PVT.LTD internship program.
 The ALU is a fundamental digital circuit used in processors to perform arithmetic and logical operations.
 
 
