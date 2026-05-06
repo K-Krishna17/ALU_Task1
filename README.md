@@ -1,1 +1,1 @@
-# ALU_Task1
+This repository contains the implementation of a basic Arithmetic Logic Unit (ALU) designed as part of the CODTECH internship program. The ALU is a fundamental digital circuit that performs arithmetic and logical operations, forming the core of most processors.
