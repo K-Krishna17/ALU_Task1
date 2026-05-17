@@ -70,7 +70,6 @@ Conclusion
 -> The simulation report documents correctness with waveform screenshots and explanations.
 
 
-
 Observe Results
 
 -> The $monitor statement in the testbench prints results for each operation.
@@ -78,3 +77,12 @@ Observe Results
 -> Waveforms can be viewed in the simulator GUI.
 
 -> Capture screenshots for the simulation report.
+
+| Time | A  | B  | ALU_SEL | Result |
+| ---- | -- | -- | ------- | ------ |
+| 0ns  | 10 | 5  | 0000    | 15     |
+| 10ns | 20 | 8  | 0001    | 12     |
+| 20ns | AA | CC | 0010    | 88     |
+| 30ns | AA | CC | 0011    | EE     |
+| 40ns | AA | XX | 0100    | 55     |
+
