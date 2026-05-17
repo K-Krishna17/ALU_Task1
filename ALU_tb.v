@@ -1,53 +1,49 @@
-// ALU Testbench
-module alu_tb;
+// ALU Module - Corrected Version
+module alu (
+    input  [7:0] A,             // Operand A
+    input  [7:0] B,             // Operand B
+    input  [3:0] ALU_SEL,       // Operation selector
+    output reg [15:0] ALU_RESULT // Wider result for multiplication
+);
 
-    reg [7:0] A, B;
-    reg [3:0] opcode;
-    wire [15:0] result;
+    always @(*) begin
+        case (ALU_SEL)
 
-    // Instantiate ALU
-    alu uut (
-        .A(A),
-        .B(B),
-        .opcode(opcode),
-        .result(result)
-    );
+            // Arithmetic Operations
+            4'b0000: ALU_RESULT = A + B;                 // Addition
+            4'b0001: ALU_RESULT = A - B;                 // Subtraction
+            4'b0010: ALU_RESULT = A * B;                 // Multiplication
+            
+            4'b0011: begin                               // Division
+                if (B != 0)
+                    ALU_RESULT = A / B;
+                else
+                    ALU_RESULT = 16'b0;                  // Handle divide-by-zero
+            end
 
-    initial begin
-        // Monitor outputs
-        $monitor("Time=%0t | A=%d | B=%d | Opcode=%b | Result=%d", $time, A, B, opcode, result);
+            // Logical Operations
+            4'b0100: ALU_RESULT = A & B;                 // Logical AND
+            4'b0101: ALU_RESULT = A | B;                 // Logical OR
+            4'b0110: ALU_RESULT = A ^ B;                 // Logical XOR
+            4'b0111: ALU_RESULT = ~A;                    // Logical NOT
 
-        // Addition
-        A = 8'd10; B = 8'd5; opcode = 4'b0000; #10;
+            // Shift Operations
+            4'b1000: ALU_RESULT = A << 1;                // Logical Shift Left
+            4'b1001: ALU_RESULT = A >> 1;                // Logical Shift Right
 
-        // Subtraction
-        A = 8'd15; B = 8'd7; opcode = 4'b0001; #10;
+            // Rotate Operations
+            4'b1010: ALU_RESULT = {A[6:0], A[7]};        // Rotate Left
+            4'b1011: ALU_RESULT = {A[0], A[7:1]};        // Rotate Right
 
-        // Multiplication
-        A = 8'd6; B = 8'd4; opcode = 4'b0010; #10;
+            // Advanced Logical Operations
+            4'b1100: ALU_RESULT = ~(A | B);              // Logical NOR
+            4'b1101: ALU_RESULT = ~(A & B);              // Logical NAND
+            4'b1110: ALU_RESULT = ~(A ^ B);              // Logical XNOR
 
-        // Division
-        A = 8'd20; B = 8'd5; opcode = 4'b0011; #10;
-
-        // AND
-        A = 8'b1100; B = 8'b1010; opcode = 4'b0100; #10;
-
-        // OR
-        A = 8'b1100; B = 8'b1010; opcode = 4'b0101; #10;
-
-        // XOR
-        A = 8'b1100; B = 8'b1010; opcode = 4'b0110; #10;
-
-        // NOT
-        A = 8'b11110000; opcode = 4'b0111; #10;
-
-        // Shift Left
-        A = 8'd8; opcode = 4'b1000; #10;
-
-        // Shift Right
-        A = 8'd8; opcode = 4'b1001; #10;
-
-        $stop; // End simulation
+            default: ALU_RESULT = 16'bxxxxxxxxxxxxxxxx;  // Default case
+        endcase
     end
-
 endmodule
+
+
+
