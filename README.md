@@ -1,3 +1,20 @@
+# INTERACTIVE- ARITHMETIC LOGIC UNIT (ALU)
+
+*COMPANY*: CODTECH IT SOLUTIONS
+
+*NAME*: KOTHURI MURALI KRISHNA 
+
+*INTERN ID*: CTIS9479
+
+*DOMAIN*: VLSI
+
+*DURATION*: 6 WEEEKS
+
+*MENTOR*: NEELA SANTOSH
+
+
+# DESCRIPTION 
+
 Task Overview:
 
 This repository contains the design and implementation of a basic Arithmetic Logic Unit (ALU) in Verilog, developed as part of TASK_1 from CODTECH IT SOLUTIONS PVT.LTD internship program.
@@ -25,8 +42,8 @@ The ALU supports the following operations, selected via a 4-bit opcode:
 | **0101** |       [OR]       |     Bitwise OR of A and B        |
 | **0110** |       [XOR]      |     Bitwise XOR of A and B       |
 | **0111** |       [NOT]      |        Bitwise NOT of A          |
-| **1000** |   [Shift Left]   |     Shifts A left by 1 bit       |
-| **1001** |   [Shift Right]  |     Shifts A right by 1 bit      |
+| **1000** |   [Shift Left]   |      Shifts A left by 1 bit      |
+| **1001** |   [Shift Right]  |      Shifts A right by 1 bit     |
 
 
 
