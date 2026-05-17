@@ -1,49 +1,107 @@
-// ALU Module - Corrected Version
-module alu (
-    input  [7:0] A,             // Operand A
-    input  [7:0] B,             // Operand B
-    input  [3:0] ALU_SEL,       // Operation selector
-    output reg [15:0] ALU_RESULT // Wider result for multiplication
-);
+// Testbench for ALU Module
 
-    always @(*) begin
-        case (ALU_SEL)
+`timescale 1ns / 1ps
 
-            // Arithmetic Operations
-            4'b0000: ALU_RESULT = A + B;                 // Addition
-            4'b0001: ALU_RESULT = A - B;                 // Subtraction
-            4'b0010: ALU_RESULT = A * B;                 // Multiplication
-            
-            4'b0011: begin                               // Division
-                if (B != 0)
-                    ALU_RESULT = A / B;
-                else
-                    ALU_RESULT = 16'b0;                  // Handle divide-by-zero
-            end
+module alu_tb;
 
-            // Logical Operations
-            4'b0100: ALU_RESULT = A & B;                 // Logical AND
-            4'b0101: ALU_RESULT = A | B;                 // Logical OR
-            4'b0110: ALU_RESULT = A ^ B;                 // Logical XOR
-            4'b0111: ALU_RESULT = ~A;                    // Logical NOT
+    // Inputs
+    reg [7:0] A;
+    reg [7:0] B;
+    reg [3:0] ALU_SEL;
 
-            // Shift Operations
-            4'b1000: ALU_RESULT = A << 1;                // Logical Shift Left
-            4'b1001: ALU_RESULT = A >> 1;                // Logical Shift Right
+    // Output
+    wire [15:0] ALU_RESULT;
 
-            // Rotate Operations
-            4'b1010: ALU_RESULT = {A[6:0], A[7]};        // Rotate Left
-            4'b1011: ALU_RESULT = {A[0], A[7:1]};        // Rotate Right
+    // Instantiate the ALU
+    alu uut (
+        .A(A),
+        .B(B),
+        .ALU_SEL(ALU_SEL),
+        .ALU_RESULT(ALU_RESULT)
+    );
 
-            // Advanced Logical Operations
-            4'b1100: ALU_RESULT = ~(A | B);              // Logical NOR
-            4'b1101: ALU_RESULT = ~(A & B);              // Logical NAND
-            4'b1110: ALU_RESULT = ~(A ^ B);              // Logical XNOR
+    // Test procedure
+    initial begin
 
-            default: ALU_RESULT = 16'bxxxxxxxxxxxxxxxx;  // Default case
-        endcase
+        // Display Header
+        $display("===============================================");
+        $display(" TIME\tA\tB\tALU_SEL\tRESULT");
+        $display("===============================================");
+
+        // Monitor Values
+        $monitor("%0dns\t%d\t%d\t%b\t%d",
+                  $time, A, B, ALU_SEL, ALU_RESULT);
+
+        // Test Addition
+        A = 8'd10; B = 8'd5; ALU_SEL = 4'b0000;
+        #10;
+
+        // Test Subtraction
+        A = 8'd20; B = 8'd8; ALU_SEL = 4'b0001;
+        #10;
+
+        // Test Multiplication
+        A = 8'd12; B = 8'd4; ALU_SEL = 4'b0010;
+        #10;
+
+        // Test Division
+        A = 8'd40; B = 8'd5; ALU_SEL = 4'b0011;
+        #10;
+
+        // Test Division by Zero
+        A = 8'd40; B = 8'd0; ALU_SEL = 4'b0011;
+        #10;
+
+        // Test AND
+        A = 8'b10101010; B = 8'b11001100; ALU_SEL = 4'b0100;
+        #10;
+
+        // Test OR
+        A = 8'b10101010; B = 8'b11001100; ALU_SEL = 4'b0101;
+        #10;
+
+        // Test XOR
+        A = 8'b10101010; B = 8'b11001100; ALU_SEL = 4'b0110;
+        #10;
+
+        // Test NOT
+        A = 8'b10101010; B = 8'b00000000; ALU_SEL = 4'b0111;
+        #10;
+
+        // Test Shift Left
+        A = 8'b00001111; B = 8'd0; ALU_SEL = 4'b1000;
+        #10;
+
+        // Test Shift Right
+        A = 8'b11110000; B = 8'd0; ALU_SEL = 4'b1001;
+        #10;
+
+        // Test Rotate Left
+        A = 8'b10000001; B = 8'd0; ALU_SEL = 4'b1010;
+        #10;
+
+        // Test Rotate Right
+        A = 8'b10000001; B = 8'd0; ALU_SEL = 4'b1011;
+        #10;
+
+        // Test NOR
+        A = 8'b10101010; B = 8'b11001100; ALU_SEL = 4'b1100;
+        #10;
+
+        // Test NAND
+        A = 8'b10101010; B = 8'b11001100; ALU_SEL = 4'b1101;
+        #10;
+
+        // Test XNOR
+        A = 8'b10101010; B = 8'b11001100; ALU_SEL = 4'b1110;
+        #10;
+
+        // End Simulation
+        $display("===============================================");
+        $display(" Simulation Completed ");
+        $display("===============================================");
+
+        $finish;
     end
+
 endmodule
-
-
-
