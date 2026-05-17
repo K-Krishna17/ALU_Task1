@@ -31,20 +31,24 @@ The goal of this task is to:
 
 
 ALU Features
-The ALU supports the following operations, selected via a 4-bit opcode:
-|  Opcode  |     Operation    |          Description             |
-| -------- | ---------------- | -------------------------------- |
-| **0000** |    [Addition]    |          Adds A and B            |
-| **0001** |   [Subtraction]  |       Subtracts B from A         |
-| **0010** | [Multiplication] |       Multiplies A and B         |
-| **0011** |    [Division]    | Divides A by B (with zero check) |
-| **0100** |       [AND]      |     Bitwise AND of A and B       |
-| **0101** |       [OR]       |     Bitwise OR of A and B        |
-| **0110** |       [XOR]      |     Bitwise XOR of A and B       |
-| **0111** |       [NOT]      |        Bitwise NOT of A          |
-| **1000** |   [Shift Left]   |      Shifts A left by 1 bit      |
-| **1001** |   [Shift Right]  |      Shifts A right by 1 bit     |
-
+The ALU supports the following operations, selected via a 8-bit opcode:
+| ALU_SEL | Operation |        Description             |
+| ------- | --------- | ------------------------------ |
+| `0000`  |    ADD    | Addition (`A + B`)             |
+| `0001`  |    SUB    | Subtraction (`A - B`)          |
+| `0010`  |    MUL    | Multiplication (`A * B`)       |
+| `0011`  |    DIV    | Division (`A / B`)             |
+| `0100`  |    AND    | Logical AND (`A & B`)          |
+| `0101`  |    OR     | Logical OR (`A \| B`)          |
+| `0110`  |    XOR    | Logical XOR (`A ^ B`)          |
+| `0111`  |    NOT    | Logical NOT (`~A`)             |
+| `1000`  |    SHL    | Logical Shift Left (`A << 1`)  |
+| `1001`  |    SHR    | Logical Shift Right (`A >> 1`) |
+| `1010`  |    ROL    | Rotate Left                    |
+| `1011`  |    ROR    | Rotate Right                   |
+| `1100`  |    NOR    | Logical NOR (`~(A \| B)`)      |
+| `1101`  |   NAND    | Logical NAND (`~(A & B)`)      |
+| `1110`  |   XNOR    | Logical XNOR (`~(A ^ B)`)      |
 
 
 Conclusion
