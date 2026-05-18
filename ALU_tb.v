@@ -2,106 +2,50 @@
 
 `timescale 1ns / 1ps
 
-module alu_tb;
+module tb_alu;
 
     // Inputs
     reg [7:0] A;
     reg [7:0] B;
-    reg [3:0] ALU_SEL;
+    reg [2:0] ALU_Sel;
 
-    // Output
-    wire [15:0] ALU_RESULT;
+    // Outputs
+    wire [7:0] ALU_Out;
+    wire CarryOut;
 
-    // Instantiate the ALU
+    // Instantiate the Unit Under Test (UUT)
     alu uut (
-        .A(A),
-        .B(B),
-        .ALU_SEL(ALU_SEL),
-        .ALU_RESULT(ALU_RESULT)
+        .A(A), 
+        .B(B), 
+        .ALU_Sel(ALU_Sel), 
+        .ALU_Out(ALU_Out), 
+        .CarryOut(CarryOut)
     );
 
-    // Test procedure
     initial begin
-
-        // Display Header
-        $display("===============================================");
-        $display(" TIME\tA\tB\tALU_SEL\tRESULT");
-        $display("===============================================");
-
-        // Monitor Values
-        $monitor("%0dns\t%d\t%d\t%b\t%d",
-                  $time, A, B, ALU_SEL, ALU_RESULT);
-
-        // Test Addition
-        A = 8'd10; B = 8'd5; ALU_SEL = 4'b0000;
+        // Initialize Inputs
+        A = 8'h00; B = 8'h00; ALU_Sel = 3'b000;
         #10;
-
-        // Test Subtraction
-        A = 8'd20; B = 8'd8; ALU_SEL = 4'b0001;
-        #10;
-
-        // Test Multiplication
-        A = 8'd12; B = 8'd4; ALU_SEL = 4'b0010;
-        #10;
-
-        // Test Division
-        A = 8'd40; B = 8'd5; ALU_SEL = 4'b0011;
-        #10;
-
-        // Test Division by Zero
-        A = 8'd40; B = 8'd0; ALU_SEL = 4'b0011;
-        #10;
-
-        // Test AND
-        A = 8'b10101010; B = 8'b11001100; ALU_SEL = 4'b0100;
-        #10;
-
-        // Test OR
-        A = 8'b10101010; B = 8'b11001100; ALU_SEL = 4'b0101;
-        #10;
-
-        // Test XOR
-        A = 8'b10101010; B = 8'b11001100; ALU_SEL = 4'b0110;
-        #10;
-
-        // Test NOT
-        A = 8'b10101010; B = 8'b00000000; ALU_SEL = 4'b0111;
-        #10;
-
-        // Test Shift Left
-        A = 8'b00001111; B = 8'd0; ALU_SEL = 4'b1000;
-        #10;
-
-        // Test Shift Right
-        A = 8'b11110000; B = 8'd0; ALU_SEL = 4'b1001;
-        #10;
-
-        // Test Rotate Left
-        A = 8'b10000001; B = 8'd0; ALU_SEL = 4'b1010;
-        #10;
-
-        // Test Rotate Right
-        A = 8'b10000001; B = 8'd0; ALU_SEL = 4'b1011;
-        #10;
-
-        // Test NOR
-        A = 8'b10101010; B = 8'b11001100; ALU_SEL = 4'b1100;
-        #10;
-
-        // Test NAND
-        A = 8'b10101010; B = 8'b11001100; ALU_SEL = 4'b1101;
-        #10;
-
-        // Test XNOR
-        A = 8'b10101010; B = 8'b11001100; ALU_SEL = 4'b1110;
-        #10;
-
-        // End Simulation
-        $display("===============================================");
-        $display(" Simulation Completed ");
-        $display("===============================================");
+        
+        // Test Case 1: Addition (0x05 + 0x02 = 0x07)
+        A = 8'h05; B = 8'h02; ALU_Sel = 3'b000; #10;
+        
+        // Test Case 2: Subtraction (0x0A - 0x04 = 0x06)
+        A = 8'h0A; B = 8'h04; ALU_Sel = 3'b001; #10;
+        
+        // Test Case 3: Bitwise AND (0xF0 & 0x0F = 0x00)
+        A = 8'hF0; B = 8'h0F; ALU_Sel = 3'b010; #10;
+        
+        // Test Case 4: Bitwise OR (0xF0 | 0x0F = 0xFF)
+        A = 8'hF0; B = 8'h0F; ALU_Sel = 3'b011; #10;
+        
+        // Test Case 5: Bitwise NOT (~0xAA = 0x55)
+        A = 8'hAA; ALU_Sel = 3'b100; #10;
+        
+        // Test Case 6: Addition with Carry-out (0xFF + 0x01 = 0x00 with Carry=1)
+        A = 8'hFF; B = 8'h01; ALU_Sel = 3'b000; #10;
 
         $finish;
     end
-
+      
 endmodule
