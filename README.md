@@ -90,9 +90,12 @@ Observe Results
 
 1. RTL DESIGN:
 
+<img width="1024" height="559" alt="Image" src="https://github.com/user-attachments/assets/da951a65-ec07-4936-8009-4166d6db4aa9" />
 
 2. SIMULATION WAVEFORM:
 
+<img width="1000" height="546" alt="Image" src="https://github.com/user-attachments/assets/d4192878-151b-440a-b717-e2058dbd0350" />
 
 3. TCL CONSOLE:
 
+<img width="1000" height="546" alt="Image" src="https://github.com/user-attachments/assets/b94f2941-6f13-4738-a30d-24ea6c9d4f93" />
