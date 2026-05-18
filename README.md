@@ -13,7 +13,7 @@
 *MENTOR*: NEELA SANTOSH
 
 
-# DESCRIPTION 
+# DESCRIPTION
 
 Task Overview:
 
@@ -85,4 +85,14 @@ Observe Results
 | 20ns | AA | CC | 0010    | 88     |
 | 30ns | AA | CC | 0011    | EE     |
 | 40ns | AA | XX | 0100    | 55     |
+
+# OUTPUT
+
+1. RTL DESIGN:
+
+
+2. SIMULATION WAVEFORM:
+
+
+3. TCL CONSOLE:
 
